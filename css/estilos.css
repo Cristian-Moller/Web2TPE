@@ -1,0 +1,73 @@
+body {
+	padding-top:70px;
+}
+
+/*Encabezado - Nav*/
+
+.marcaimagen {
+    width: 10%;
+    height: auto;
+    display: inline !important; /*al sacar important titulo e imagen no quedan alineados*/
+}
+
+@media only screen and (min-width:300px) and (max-width: 800px) {
+    .navbar-header {
+        float: none;
+    }
+    .navbar-left,.navbar-right {
+        float: none;
+    }
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .navbar-fixed-top {
+		top: 0;
+		border-width: 0 0 1px;
+	}
+    .navbar-collapse.collapse {
+        display: none;
+    }
+    .navbar-nav {
+        float: none;
+		margin-top: 7.5px;
+	}
+	.navbar-nav>li {
+        float: none;
+    }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .collapse.in{
+  		display: block;
+	}
+}
+
+
+
+/* Tabla */
+a.disabled{
+    pointer-events: none;
+    cursor: default;
+    color: grey;
+}
+
+
+/* Footer */
+.iconos, .fb-ic, .tw-ic, .ins-ic {
+    padding: 1%;
+}
+footer {
+    margin-top: 10%;
+    margin-bottom: 5%;
+}
+.footerVehiculos {
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+}
+
