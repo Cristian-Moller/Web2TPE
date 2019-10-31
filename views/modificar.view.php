@@ -9,7 +9,6 @@ class ModificarView{
   }
 
     function completeForm($vehiculo, $marcas){
-      $this->smarty->assign('EDIT', EDIT); 
       $this->smarty->assign('BASE_URL', BASE_URL );
       $this->smarty->assign('vehiculo', $vehiculo );
       $this->smarty->assign('marcas', $marcas);

@@ -7,6 +7,8 @@
         <base href='.BASE_URL.'>
         <link rel="stylesheet" type="text/css" href="./css/estilos.css">
         <link rel="shortcut icon" href="./imagen/segunda_imagen.jpg">
+        <link rel="stylesheet" type="text/css" href="../css/estilos.css"/>
+        <link rel="shortcut icon" href="../imagen/segunda_imagen.jpg">
 
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -20,7 +22,10 @@
         <!--Encabezado-->
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="navbar-header">
-            <a class="navbar-brand" href=""><img class="marcaimagen" src="./imagen/marca.jpg" alt="auto">Automotores Serenidad</a>
+            <a class="navbar-brand" href="/">
+                <object class="marcaimagen" data="../imagen/marca.jpg" type="image/png">
+                    <img class="marcaimagen" src="./imagen/marca.jpg" alt="auto">
+                </object>Automotores Serenidad</a>
             </div>
 
             <div class="navbar-collapse collapse">
