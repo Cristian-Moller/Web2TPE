@@ -34,10 +34,30 @@ class VehiculoModel {
         $sentencia->execute(array($id));
     }
 
+    public function EditarVehiculo($id,$nombre,$combustible,$color,$precio,$id_marca_fk,$vendido){
+        $sentencia =  $this->db->prepare("UPDATE vehiculo SET nombre=?, combustible=?, color=?, precio=?, id_marca_fk=?, vendido=? WHERE id=?");
+        $sentencia->execute(array($nombre,$combustible,$color,$precio,$id_marca_fk,$vendido,$id));
+    }
+
     public function BorrarVehiculo($id){
         $sentencia = $this->db->prepare("DELETE FROM vehiculo WHERE id=?");
         $sentencia->execute(array($id));
     }
 
+    public function GetById($id){
+          //preparo la consulta
+          $query = $this->db->prepare("SELECT * FROM vehiculo WHERE id=?");
+
+          // ejecuto la consulta
+          $ok = $query -> execute(array($id));
+          if(!$ok) var_dump($query->errorInfo());
+      
+          // obtengo la respuesta
+          $vehiculo = $query->fetchAll(PDO::FETCH_OBJ);
+          if (isset($vehiculo))
+          { return $vehiculo[0];}
+          else return NULL;
+         
+    }
 }
 	
