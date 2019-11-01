@@ -18,7 +18,6 @@ if($action == ''){
 }else{
     if (isset($action)){
         $partesURL = explode("/", $action);
-        print_r($partesURL);
 
         if($partesURL[0] == "vehiculo"){
             $controllerVehiculo->showVehiculos();
@@ -35,6 +34,8 @@ if($action == ''){
             $controllerVehiculo->BorrarVehiculo($partesURL[1]);
         }elseif($partesURL[0] == "login") {
             $controller->showLogin();
+        }elseif($partesURL[0] == "logout") {
+            $controller->logout();
         } elseif($partesURL[0] == "ingresar"){
             $controller->Ingresar();
         } 

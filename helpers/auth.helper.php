@@ -7,28 +7,22 @@ class AuthHelper {
         // INICIO LA SESSION Y LOGUEO AL USUARIO
         session_start();
         $_SESSION['ID_USER'] = $user->id;
-        $_SESSION['USERNAME'] = $user->username;
+        $_SESSION['USERNAME'] = $user->email;
     }
 
     public function logout() {
         session_start();
         session_destroy();
+        header('Location: ' . BASE_URL);
     }
 
     public function redirectLoggedIn() {
         session_start();
+
         if (!isset($_SESSION['ID_USER'])) {
-            header('Location: ' . LOGIN);
+            header('Location: ' . URL_LOGIN);
             die();
         }       
-    }
-
-    public function checkLoggedIn() {
-       // session_start();
-        if (!isset($_SESSION['ID_USER'])) {
-           return false;
-        }       
-        return true;
     }
 
     public function getLoggedUserName() {

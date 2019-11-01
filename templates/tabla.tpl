@@ -41,6 +41,7 @@
                 <td>{$vehiculo->combustible}</td>
                 <td>{$vehiculo->color}</td>
                 <td>{$vehiculo->precio}</td>
+
                 <td class='bt-icon'><a href='vender/{$vehiculo->id}'>Vender</a></td>
               
                 <td class='bt-icon'><a href='editar/{$vehiculo->id}'><i class="fas fa-pencil-alt"></i></a></td>
@@ -52,8 +53,6 @@
 
         </tbody>
     </table> 
- 
-        
             <form action="insertar" method="post">
                 <input type="text" name="nombre" placeholder="Modelo">
                 <input type="text" name="combustible"  placeholder="Combustible">
@@ -68,5 +67,5 @@
                 <input type="checkbox" name="vendido" id="vendido">
                 <input type="submit" value="Insertar">
             </form>
-
+        
     {include 'templates/footer.tpl'}

@@ -22,18 +22,17 @@
         <!--Encabezado-->
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="navbar-header">
-            <a class="navbar-brand" href="/">
+                <a class="navbar-brand" href="./">
                 <object class="marcaimagen" data="../imagen/marca.jpg" type="image/png">
                     <img class="marcaimagen" src="./imagen/marca.jpg" alt="auto">
                 </object>Automotores Serenidad</a>
             </div>
 
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                  <li><a href="login">LogIn</a></li>
-                </ul>
-              </div>
-
+            <div class="btn btn-outline-success" role="group">
+                <button class="btn btn-outline-success" type="button"><a class="nav-item nav-link" href="login">LogIn</a></button>
+                <button class="btn btn-outline-success" type="button"><a class="nav-item nav-link" href="logout">LogOut</a></button>                    
+            </div>
+        
         </nav>
     </body>
     </html>

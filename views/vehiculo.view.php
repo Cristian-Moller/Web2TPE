@@ -5,20 +5,16 @@ require_once('./helpers/auth.helper.php');
 class VehiculoView{
   
   private $smarty;
-  private $authHelper;
-  private $isLoged;
+
   function __construct(){
     $smarty = $this->smarty = new Smarty();
-    $authHelper = $this->authHelper = new AuthHelper();
-    $isLoged = false;
   }
 
     function displayAll($vehiculos, $marcas){
-      $isLoged =  $this->authHelper->checkLoggedIn();
+      
       $this->smarty->assign('BASE_URL', BASE_URL);
       $this->smarty->assign('vehiculos', $vehiculos);
       $this->smarty->assign('marcas', $marcas);
-      $this->smarty->assign('isloged', $isLoged);
       $this->smarty->display('templates/tabla.tpl');
       
     }

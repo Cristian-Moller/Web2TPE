@@ -22,20 +22,25 @@ class VehiculoController{
     function showVehiculos() {
         $vehiculos = $this->vehiculosModel->getAll();
         $marcas = $this->marcasModel->getAll();
+       
         $this->vehiculosView->displayAll($vehiculos, $marcas);    
     }
 
     public function VenderVehiculo($id){
+        $this->authHelper->redirectLoggedIn();
         $this->vehiculosModel->VenderVehiculo($id);
         header("Location: " . BASE_URL);
     }
 
     public function BorrarVehiculo($id){
+        $this->authHelper->redirectLoggedIn();
         $this->vehiculosModel->BorrarVehiculo($id);
         header("Location: " . BASE_URL);
     }
 
     public function InsertarVehiculo(){
+        $this->authHelper->redirectLoggedIn();
+
         $vendido = 0;
         if(isset($_POST['vendido'])){
             if($_POST['vendido'] == 'on'){
