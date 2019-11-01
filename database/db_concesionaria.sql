@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-10-2019 a las 12:30:17
+-- Tiempo de generación: 01-11-2019 a las 11:09:07
 -- Versión del servidor: 10.1.37-MariaDB
 -- Versión de PHP: 7.2.12
 
@@ -66,8 +66,8 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `email`, `password`) VALUES
-(1, 'test@test.com', '123456'),
-(2, 'test@test.com', '123456');
+(1, 'test1@test.com', '$2y$12$yhMVNmdzYTSeF7SWpEL0yux96UAXS67u2.wrR9Qs45//Pr90/alQ.'),
+(2, 'test@test.com', '$2b$10$aT9mJkXfRz/hQjUh1DtCf.qdH/dfiieX1yYC5shJHhpSJdF2phl7e');
 
 -- --------------------------------------------------------
 
@@ -90,16 +90,15 @@ CREATE TABLE `vehiculo` (
 --
 
 INSERT INTO `vehiculo` (`id`, `nombre`, `combustible`, `color`, `precio`, `id_marca_fk`, `vendido`) VALUES
-(1, 'QQ', 'Nafta', 'Blanco', 140000, 10, 0),
+(1, 'QQ', 'Nafta', 'Blanco', 140000, 3, 1),
 (2, 'Corsa', 'Nafta', 'Azul', 180000, 2, 0),
-(8, 'QQ', 'Nafta', 'Gris', 1234, 1, 1),
+(8, 'QQ', 'Nafta', 'Gris', 1234, 10, 0),
 (11, 'Corsa', 'Nafta', 'Azul', 175000, 10, 0),
 (12, 'C3', 'Nafta', 'Negro', 240000, 10, 0),
-(13, 'Siena', 'Nafta', 'Negro', 190000, 7, 0),
-(14, 'Golf R-32', 'Nafta', 'Verde', 250000, 3, 1),
+(13, 'Siena', 'Nafta', 'Negro', 190000, 10, 1),
+(14, 'Golf R-32', 'Nafta', 'Verde', 250000, 10, 1),
 (15, 'Golf R-32', 'Nafta', 'Azul', 210000, 3, 0),
-(17, 'Palio', 'Nafta', 'Rojo', 150000, 10, 0),
-(19, 'safdg', 'Nafta', 'Azul', 23424, 1, 1);
+(22, 'QQ', 'Gasoil', 'Gris', 245354, 1, 0);
 
 --
 -- Índices para tablas volcadas
@@ -115,7 +114,8 @@ ALTER TABLE `marca`
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indices de la tabla `vehiculo`
@@ -144,7 +144,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `vehiculo`
 --
 ALTER TABLE `vehiculo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Restricciones para tablas volcadas
