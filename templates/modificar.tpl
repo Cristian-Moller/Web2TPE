@@ -1,7 +1,7 @@
 {include 'templates/header.tpl'}
 
-<form action="guardar" method="post">
-	<div class="input-group">
+<form action="guardar" method="post" class="col-md-10" enctype="multipart/form-data">
+	<div class="input-group-center">
 		<input type="number" name="id" value="{$vehiculo->id}" style="display:none;"/>
 		<div class="input-group col-md-4">		
 			Modelo: <input type="text" name="modelo" value="{$vehiculo->nombre}">
@@ -34,6 +34,7 @@
 					Vendido: <input type="checkbox" name="vendido" id="vendido">
 				{/if}
 		</div>
+		<input type="file" name="imagen" id="">
 
 		<input type="submit" value="Guardar">
 		<button><a href="../">Cancelar</a></button>

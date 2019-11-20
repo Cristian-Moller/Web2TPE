@@ -9,11 +9,13 @@ class LoginController{
     private $authHelper;
     private $loginModel;
     private $loginview;
+    
 
     function __construct() {
-        $this->loginModel = new LoginModel();
         $this->authHelper = new AuthHelper();
+        $this->loginModel = new LoginModel();
         $this->loginview = new LoginView();
+
     }
 
     public function showLogin() {
@@ -33,6 +35,7 @@ class LoginController{
         if (!empty($user) && password_verify($password, $user->password)) {
             $this->authHelper->login($user);
             header('Location: ' . BASE_URL);
+                       
         } else {
             $this->loginview->showLogin("Login incorrecto");
         }

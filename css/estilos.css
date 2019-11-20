@@ -20,4 +20,10 @@ footer {
     margin-bottom: 5%;
 }
 
+.alignVertical tbody tr td, .alignVertical tbody tr th {
+    vertical-align: middle !important;
+}
 
+.alignVertical tbody tr td img {
+    width: 180px;
+}

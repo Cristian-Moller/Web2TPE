@@ -1,17 +1,20 @@
 <?php
 require_once('./controllers/vehiculo.controller.php');
+require_once('./controllers/marca.controller.php');
+require_once('./api/apiController.php');
 require_once('./controllers/login.controller.php');
-require_once('./controllers/modificar.controller.php');
 
 $action = $_GET["action"];
 define("BASE_URL", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/');
 define("EDITAR", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/editar');
 define("URL_LOGIN", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/login');
 define("URL_LOGOUT", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/logout');
+define("MARCA", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/marcas');
 
 $controllerVehiculo = new VehiculoController();
-$controllerModificar = new ModificarController();  
-$controller = new LoginController();
+$controllerMarca = new MarcaController();
+$controllerAPI = new VehiculoApiController();
+$logincontroller = new LoginController();
 
 if($action == ''){
     $controllerVehiculo->showVehiculos();
@@ -27,18 +30,29 @@ if($action == ''){
             $controllerVehiculo->VenderVehiculo($partesURL[1]);
 
         }elseif($partesURL[0] == "editar" && $partesURL[1] != "guardar") {
-            $controllerModificar->GetVehiculo($partesURL[1]);
+            $controllerVehiculo->GetVehiculo($partesURL[1]);
         } elseif($partesURL[0] == "editar" && $partesURL[1] == "guardar") {
-            $controllerModificar->EditarVehiculo();
+            $controllerVehiculo->EditarVehiculo();
         } elseif($partesURL[0] == "borrar") {
             $controllerVehiculo->BorrarVehiculo($partesURL[1]);
         }elseif($partesURL[0] == "login") {
-            $controller->showLogin();
+            $logincontroller->showLogin();
         }elseif($partesURL[0] == "logout") {
-            $controller->logout();
+            $logincontroller->logout();
         } elseif($partesURL[0] == "ingresar"){
-            $controller->Ingresar();
-        } 
+            $logincontroller->Ingresar();
+
+        } elseif($partesURL[0] == "marcas"){
+            $controllerMarca->showMarcas();
+        }elseif($partesURL[0] == "insertarMarca"){
+            $controllerMarca->InsertarMarca();
+        }elseif($partesURL[0] == "borrarMarca"){
+            $controllerMarca->BorrarMarca($partesURL[1]);
+        }elseif($partesURL[0] == "editarMarca" && $partesURL[1] != "guardarMarca"){
+            $controllerMarca->GetMarca($partesURL[1]);
+        }elseif($partesURL[0] == "editarMarca" && $partesURL[1] == "guardarMarca"){
+            $controllerMarca->EditarMarca($partesURL[1]);
+        }
     }
 
 }

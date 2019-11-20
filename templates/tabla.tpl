@@ -1,6 +1,12 @@
-   {include 'templates/header.tpl'}
-   
-   <table class="table table-striped" id="tabla">
+{include 'templates/header.tpl'}
+<div>
+        {if $logueado}
+            <div class="alert alert-success" role="alert">
+            {$logueado}
+            </div>
+        {/if}
+
+    <table class="table table-striped alignVertical" id="tabla">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -9,6 +15,7 @@
             <th scope="col">Combustible</th>
             <th scope="col">Color</th>
             <th scope="col">Precio</th>
+            <th scope="col">Imagen</th>
             <th scope="col">Vender</th>
             <th scope="col">Editar</th>
             <th scope="col">Eliminar</th>
@@ -27,6 +34,8 @@
                 <td>{$vehiculo->combustible}</td>
                 <td>{$vehiculo->color}</td>
                 <td>{$vehiculo->precio}</td>
+                <td> <img onerror="this.onerror=null;this.src='img/default/notfound.png'" src="{$vehiculo->imagen_url}" alt="{$vehiculo->nombre}"> </td>
+
                 <td class='bt-icon'><a class='disabled'>Vendido</a></td>
                 
                 <td class='bt-icon'><a href='editar/{$vehiculo->id}'><i class="fas fa-pencil-alt"></i></a></td>
@@ -41,6 +50,7 @@
                 <td>{$vehiculo->combustible}</td>
                 <td>{$vehiculo->color}</td>
                 <td>{$vehiculo->precio}</td>
+                <td> <img onerror="this.onerror=null;this.src='img/default/notfound.png'" src="{$vehiculo->imagen_url}" alt="{$vehiculo->nombre}"> </td>
 
                 <td class='bt-icon'><a href='vender/{$vehiculo->id}'>Vender</a></td>
               
@@ -53,7 +63,7 @@
 
         </tbody>
     </table> 
-            <form action="insertar" method="post">
+            <form action="insertar" method="post" enctype="multipart/form-data">
                 <input type="text" name="nombre" placeholder="Modelo">
                 <input type="text" name="combustible"  placeholder="Combustible">
                 <input type="text" name="color" placeholder="Color">
@@ -65,7 +75,11 @@
                     {/foreach}            
                 </select>
                 <input type="checkbox" name="vendido" id="vendido">
+                <input type="file" name="imagen" id="">
                 <input type="submit" value="Insertar">
             </form>
-        
-    {include 'templates/footer.tpl'}
+            <input type="submit" value="Marcas" 
+            onclick="window.location='marcas';" /> 
+    
+</div>    
+{include 'templates/footer.tpl'}

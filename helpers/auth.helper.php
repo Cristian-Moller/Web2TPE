@@ -8,6 +8,7 @@ class AuthHelper {
         session_start();
         $_SESSION['ID_USER'] = $user->id;
         $_SESSION['USERNAME'] = $user->email;
+        
     }
 
     public function logout() {
@@ -28,6 +29,10 @@ class AuthHelper {
     public function getLoggedUserName() {
         if (session_status() != PHP_SESSION_ACTIVE)
             session_start();
-        return $_SESSION['USERNAME'];
+            if (isset ($_SESSION['USERNAME'])){
+                return $_SESSION['USERNAME'];
+            } else {
+                return null;
+            } 
     }
 }
