@@ -136,5 +136,9 @@ class VehiculoController{
         return $valido;
     }
     */
+
+    public function VerDetalle($id){
+        $this->vehiculosView->DisplayVehiculoCSR($id);
+    }
 }
 

@@ -47,9 +47,9 @@ class MarcaModel {
         if(!$ok) var_dump($query->errorInfo());
     
         // obtengo la respuesta
-        $marca = $query->fetchAll(PDO::FETCH_OBJ);
+        $marca = $query->fetch(PDO::FETCH_OBJ);
         if (isset($marca))
-        { return $marca[0];}
+        { return (array)$marca;}
         else return NULL;
     }
 

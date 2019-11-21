@@ -65,17 +65,9 @@ class VehiculoModel {
     public function GetById($id){
           //preparo la consulta
           $query = $this->db->prepare("SELECT * FROM vehiculo WHERE id=?");
-
-          // ejecuto la consulta
-          $ok = $query -> execute(array($id));
-          if(!$ok) var_dump($query->errorInfo());
-      
-          // obtengo la respuesta
-          $vehiculo = $query->fetchAll(PDO::FETCH_OBJ);
-          if (isset($vehiculo))
-          { return $vehiculo[0];}
-          else return NULL;
-         
+          $query->execute([$id]);
+          $vehiculo = $query->fetch(PDO::FETCH_OBJ);
+          return (array)$vehiculo;
     }
 }
 	

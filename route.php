@@ -1,7 +1,6 @@
 <?php
 require_once('./controllers/vehiculo.controller.php');
 require_once('./controllers/marca.controller.php');
-require_once('./api/apiController.php');
 require_once('./controllers/login.controller.php');
 
 $action = $_GET["action"];
@@ -13,7 +12,7 @@ define("MARCA", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].di
 
 $controllerVehiculo = new VehiculoController();
 $controllerMarca = new MarcaController();
-$controllerAPI = new VehiculoApiController();
+//$controllerAPI = new VehiculoApiController();
 $logincontroller = new LoginController();
 
 if($action == ''){
@@ -52,6 +51,8 @@ if($action == ''){
             $controllerMarca->GetMarca($partesURL[1]);
         }elseif($partesURL[0] == "editarMarca" && $partesURL[1] == "guardarMarca"){
             $controllerMarca->EditarMarca($partesURL[1]);
+        }elseif($partesURL[0] == "detalle"){
+            $controllerVehiculo->VerDetalle($partesURL[1]);
         }
     }
 

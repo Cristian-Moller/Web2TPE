@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <base href='.BASE_URL.'>
+        <base href='{BASE_URL}'/>
         <link rel="stylesheet" type="text/css" href="./css/estilos.css">
         <link rel="shortcut icon" href="./imagen/segunda_imagen.jpg">
         <link rel="stylesheet" type="text/css" href="../css/estilos.css"/>
@@ -18,7 +18,6 @@
         <title>Concesionaria</title>
     </head>
     <body>
-
         <!--Encabezado-->
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="navbar-header">
@@ -34,5 +33,3 @@
             </div>
         
         </nav>
-    </body>
-    </html>

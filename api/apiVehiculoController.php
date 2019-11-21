@@ -2,25 +2,21 @@
 require_once("./models/vehiculo.model.php");
 require_once('./models/marca.model.php');
 require_once("./api/JSONView.php");
-require_once('./views/vehiculo.view.php');
 require_once('./models/login.model.php');
 require_once('./helpers/auth.helper.php');
 
 
-class VehiculoApiController {
+class ApiVehiculoController {
     private $vehiculosModel;
     private $marcasModel;
     private $view;
-    private $vehiculosView;
     private $authHelper;
 
     public function __construct() {
         $this->vehiculosModel = new VehiculoModel();
         $this->marcasModel = new MarcaModel();
         $this->view = new JSONView();
-        $this->vehiculosView = new VehiculoView();
         $this->authHelper = new AuthHelper();
-
     }
 
     public function getAll($params = null) {
@@ -34,18 +30,17 @@ class VehiculoApiController {
      * $params arreglo asociativo con los parámetros del recurso
      */
     public function GetById($params = null) {
-        $this->authHelper->redirectLoggedIn();
+   //     $this->authHelper->redirectLoggedIn();
 
         // obtiene el parametro de la ruta
-        $id = $params;
+        $id = $params[':ID'];
         
         $vehiculo = $this->vehiculosModel->GetById($id);
-        $marcas = $this->marcasModel->getAll();
-
+        $marca = $this->marcasModel->getMarca($vehiculo['id_marca_fk']);
         
         if ($vehiculo) {
-            //$this->view->response($vehiculo, 200); //implementar con fetch..
-            $this->vehiculosView->completeForm($vehiculo, $marcas);  
+            $vehiculo['nombreMarca'] = $marca['nombre'];
+            $this->view->response($vehiculo, 200); //implementar con fetch..
         } else {
             $this->view->response("No existe la tarea con el id={$id}", 404);
         }
