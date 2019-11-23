@@ -1,29 +1,47 @@
 body {
-	padding-top:70px;
+  padding-top: 70px;
 }
 
 /*Encabezado - Nav*/
 
 .marcaimagen {
-    width: 10%;
-    height: auto;
-    display: inline !important; /*al sacar important titulo e imagen no quedan alineados*/
+  width: 10%;
+  height: auto;
+  display: inline !important; /*al sacar important titulo e imagen no quedan alineados*/
 }
-
 
 /* Footer */
-.iconos, .fb-ic, .tw-ic, .ins-ic {
-    padding: 1%;
+.iconos,
+.fb-ic,
+.tw-ic,
+.ins-ic {
+  padding: 1%;
 }
 footer {
-    margin-top: 10%;
-    margin-bottom: 5%;
+  margin-top: 10%;
+  margin-bottom: 5%;
 }
 
-.alignVertical tbody tr td, .alignVertical tbody tr th {
-    vertical-align: middle !important;
+.alignVertical tbody tr td,
+.alignVertical tbody tr th {
+  vertical-align: middle !important;
 }
 
 .alignVertical tbody tr td img {
-    width: 180px;
+  width: 180px;
+}
+
+.center-button {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.container-fluid .card #myCarousel #carousel-container {
+  background-image: unset !important;
+}
+
+#vehiculo-container .align-center {
+  text-align: center;
+  width: 100%;
+  margin-top: 1rem;
 }

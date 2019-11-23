@@ -28,10 +28,8 @@ if($action == ''){
         }elseif($partesURL[0] == "vender") {
             $controllerVehiculo->VenderVehiculo($partesURL[1]);
 
-        }elseif($partesURL[0] == "editar" && $partesURL[1] != "guardar") {
+        }elseif($partesURL[0] == "editar") {
             $controllerVehiculo->GetVehiculo($partesURL[1]);
-        } elseif($partesURL[0] == "editar" && $partesURL[1] == "guardar") {
-            $controllerVehiculo->EditarVehiculo();
         } elseif($partesURL[0] == "borrar") {
             $controllerVehiculo->BorrarVehiculo($partesURL[1]);
         }elseif($partesURL[0] == "login") {

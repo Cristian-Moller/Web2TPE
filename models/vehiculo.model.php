@@ -6,6 +6,8 @@ class VehiculoModel {
     public function __construct(){
         $this->db = new PDO ('mysql:host=localhost;dbname=db_concesionaria;
                         charset=utf8','root','');
+        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+
     }
 
     function getAll(){     
@@ -22,14 +24,10 @@ class VehiculoModel {
         return $vehiculos;
     }
 
-    public function InsertarVehiculo($nombre,$combustible,$color,$precio,$id_marca_fk,$vendido, $imagen = null) {
-        $filepath = null;
-        if ($imagen)
-        $filepath = $this->moveFile($imagen);
-        
-        $query = $this->db->prepare("INSERT INTO vehiculo(nombre,combustible,color,precio,id_marca_fk,vendido, imagen_url) VALUES(?,?,?,?,?,?,?)");
-        $query->execute(array($nombre,$combustible,$color,$precio,$id_marca_fk,$vendido, $filepath));
-
+    public function InsertarVehiculo($nombre,$combustible,$color,$precio,$id_marca_fk,$vendido) {
+        $query = $this->db->prepare("INSERT INTO vehiculo(nombre,combustible,color,precio,id_marca_fk,vendido) VALUES(?,?,?,?,?,?)");
+        $query->execute(array($nombre,$combustible,$color,$precio,$id_marca_fk,$vendido));
+        return $this->db->lastInsertId();
     }
 
     //  mueve la imagen y retorna la ubicación
@@ -44,19 +42,16 @@ class VehiculoModel {
         $sentencia->execute(array($id));
     }
 
-    public function EditarVehiculo($id,$nombre,$combustible,$color,$precio,$id_marca_fk,$vendido,$imagen = null){
-        $filepath = null;
-        if ($imagen)
-        $filepath = $this->moveFile($imagen);
-        var_dump($filepath);
-        $sentencia =  $this->db->prepare("UPDATE vehiculo SET nombre=?, combustible=?, color=?, precio=?, id_marca_fk=?, vendido=?, imagen_url=? WHERE id=?");
-        $sentencia->execute(array($nombre,$combustible,$color,$precio,$id_marca_fk,$vendido,$filepath,$id));
+    public function EditarVehiculo($id,$nombre,$combustible,$color,$precio,$id_marca_fk,$vendido){
+        $sentencia =  $this->db->prepare("UPDATE vehiculo SET nombre=?, combustible=?, color=?, precio=?, id_marca_fk=?, vendido=? WHERE id=?");
+        $sentencia->execute(array($nombre,$combustible,$color,$precio,$id_marca_fk,$vendido,$id));
+
+        return $id;
     }
 
     public function BorrarVehiculo($id){
 
         $vehiculo = $this->GetById($id);
-        unlink($vehiculo->imagen_url);
         
         $sentencia = $this->db->prepare("DELETE FROM vehiculo WHERE id=?");
         $sentencia->execute(array($id));

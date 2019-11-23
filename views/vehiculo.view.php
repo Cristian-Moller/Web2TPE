@@ -20,10 +20,9 @@ class VehiculoView{
       
     }
 
-    function completeForm($vehiculo, $marcas){
+    function completeForm($id){
       $this->smarty->assign('BASE_URL', BASE_URL );
-      $this->smarty->assign('vehiculo', $vehiculo );
-      $this->smarty->assign('marcas', $marcas);
+      $this->smarty->assign('id', $id );
       $this->smarty->display('templates/modificar.tpl');
 
     }
@@ -36,12 +35,23 @@ class VehiculoView{
         var_dump($vehiculo);
     }
 
-    function DisplayVehiculoCSR($id){
+    function DisplayVehiculoCSR($id, $action){
       $smarty = new Smarty();
         $smarty->assign('titulo',"Detalle Vehiculo");
         $smarty->assign('id', $id);
+        $smarty->assign('action', $action);
         $smarty->assign('BASE_URL',BASE_URL);
         $smarty->display('templates/vehiculodetail.tpl');
+
+    }
+
+    function ModificarVehiculoCSR($id, $action){
+      $smarty = new Smarty();
+        $smarty->assign('titulo',"Detalle Vehiculo");
+        $smarty->assign('id', $id);
+        $smarty->assign('action', $action);
+        $smarty->assign('BASE_URL',BASE_URL);
+        $smarty->display('templates/modificar.tpl');
 
     }
 }

@@ -3,6 +3,7 @@
 require_once('./models/vehiculo.model.php');
 require_once('./views/vehiculo.view.php');
 require_once('./models/marca.model.php');
+require_once('./models/image.model.php');
 require_once('./models/login.model.php');
 require_once('./helpers/auth.helper.php');
 
@@ -11,12 +12,14 @@ class VehiculoController{
     private $vehiculosView;
     private $marcasModel;
     private $authHelper;
+    private $imagenModel;
 
     function __construct() {
         $this->vehiculosModel = new VehiculoModel();
         $this->vehiculosView = new VehiculoView();
         $this->marcasModel = new MarcaModel();
         $this->authHelper = new AuthHelper();
+        $this->imagenModel = new ImageModel();
     }
 
     function showVehiculos() {
@@ -35,6 +38,7 @@ class VehiculoController{
 
     public function BorrarVehiculo($id){
         $this->authHelper->redirectLoggedIn();
+        $this->imagenModel->deleteImagenes($id);
         $this->vehiculosModel->BorrarVehiculo($id);
         header("Location: " . BASE_URL);
     }
@@ -42,39 +46,9 @@ class VehiculoController{
     public function InsertarVehiculo(){
         $this->authHelper->redirectLoggedIn();
 
-        $vendido = 0;
-        if(isset($_POST['vendido'])){
-            if($_POST['vendido'] == 'on'){
-                $vendido = 1;
-            }
-        }
-       
-      /*  $isValid = $this->validarFile();
+        $this->vehiculosView->ModificarVehiculoCSR(null, "EDIT");
 
-        if($isValid){
-            $this->vehiculosModel->InsertarVehiculo($_POST['nombre'],$_POST['combustible'],$_POST['color'],$_POST['precio'],$_POST['marca'], $vendido, $_FILES['imagen']);
-        } else {
-            $this->vehiculosView->showError("Formato no aceptado");
-        }
-        */
-  
-        // agarra el file
-        var_dump($_FILES);
-        if ($_FILES['imagen']['name']) {
-            if ($_FILES['imagen']['type'] == "image/jpeg" || $_FILES['imagen']['type'] == "image/jpg" || $_FILES['imagen']['type'] == "image/png") {
-                
-                $this->vehiculosModel->InsertarVehiculo($_POST['nombre'],$_POST['combustible'],$_POST['color'],$_POST['precio'],$_POST['marca'], $vendido, $_FILES['imagen']);
-            }
-            else {
-                $this->vehiculosView->showError("Formato no aceptado");
-                die();
-            }
-        }
-        else {
-            $this->vehiculosModel->InsertarVehiculo($_POST['nombre'],$_POST['combustible'],$_POST['color'],$_POST['precio'],$_POST['marca'], $vendido);
-        }
-
-        header("Location: " . BASE_URL);
+        //header("Location: " . BASE_URL);
     }
 
     public function EditarVehiculo(){
@@ -108,11 +82,7 @@ class VehiculoController{
     public function GetVehiculo($id){
         $this->authHelper->redirectLoggedIn();
 
-        $vehiculo = $this->vehiculosModel->GetById($id);
-        $marcas = $this->marcasModel->getAll();
-        
-        $this->vehiculosView->completeForm($vehiculo, $marcas);  
-        
+        $this->vehiculosView->ModificarVehiculoCSR($id, "EDIT");
     }
     
 
@@ -138,7 +108,7 @@ class VehiculoController{
     */
 
     public function VerDetalle($id){
-        $this->vehiculosView->DisplayVehiculoCSR($id);
+        $this->vehiculosView->DisplayVehiculoCSR($id, "DETALLE");
     }
 }
 

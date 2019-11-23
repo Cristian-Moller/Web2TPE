@@ -1,44 +1,51 @@
 {include 'templates/header.tpl'}
+<div class="container-fluid" id="vehiculo-container">
+	<h3>
+		Editar Vehículo
+	</h3>
+	<form action="submit" id="vehiculo-form" method="post" class="col-md-10" enctype="multipart/form-data">
+		<div class="input-group-center">
+			<input id="vehiculo-id" name="vehiculoId" type="hidden" value="{$id}">
+			<input id="vehiculo-action" name="vehiculoAction" type="hidden" value="{$action}">
+			<div class="input-group col-xs-6">
+				Modelo: <input class="form-control" type="text" name="modelo" value="">
+			</div>
+			<div class="input-group col-xs-6">
+				Combustible: <input class="form-control" type="text" name="combustible" value="">
+			</div>
+			<div class="input-group col-xs-6">
+				Color: <input class="form-control" type="text" name="color" value="">
+			</div>
+			<div class="input-group col-xs-6">
+				Precio: <input class="form-control" type="number" name="precio" value="">
+			</div>
+			<div class="input-group col-xs-6">
+				Marca: <select class="form-control" name="marca" id="marca-select">
 
-<form action="guardar" method="post" class="col-md-10" enctype="multipart/form-data">
-	<div class="input-group-center">
-		<input type="number" name="id" value="{$vehiculo->id}" style="display:none;"/>
-		<div class="input-group col-md-4">		
-			Modelo: <input type="text" name="modelo" value="{$vehiculo->nombre}">
-		</div>
-		<div class="input-group col-md-4">
-			Combustible: <input type="text" name="combustible" value="{$vehiculo->combustible}">
-		</div>		
-		<div class="input-group col-md-4">
-			Color: <input type="text" name="color" value="{$vehiculo->color}">
-		</div>			
-		<div class="input-group col-md-4">
-			Precio: <input type="number" name="precio" value="{$vehiculo->precio}">
-		</div>		
-		<div class="input-group col-md-4">
-			Marca: <select name="marca">
-				<option value='{$vehiculo->id_marca_fk}'>Seleccione</option>
-					{foreach from=$marcas item=marca}
-						{if $marca->id eq $vehiculo->id_marca_fk}
-							<option value='{$marca->id}' selected> {$marca->nombre} </option>
-						{else}
-							<option value='{$marca->id}' selected> {$marca->nombre} </option>
-						{/if}
-					{/foreach}   
-		</div>
-		<div class="input-group col-md-4">
-			</select>
-				{if $vehiculo->vendido eq 1}
-					Vendido: <input type="checkbox" name="vendido" id="vendido" checked>
-				{else}	
-					Vendido: <input type="checkbox" name="vendido" id="vendido">
-				{/if}
-		</div>
-		<input type="file" name="imagen" id="">
+				</select>
+			</div>
+			<div class="input-group checkbox">
+				<label class="checkbox-inline"><input type="checkbox" name="vendido" id="vendido">Vendido</label>
 
-		<input type="submit" value="Guardar">
-		<button><a href="../">Cancelar</a></button>
-	</div>
-</form>
+			</div>
+			<h4>
+				Imagenes
+			</h4>
+			<div id="image-preview">
+
+			</div>
+
+			<div>
+				<input type="file" name="imagen[]" multiple id="imagenes">
+			</div>
+			<div class="align-center">
+				<input type="submit" class="btn btn-success" value="Guardar" id="upload">
+				<a class="btn btn-danger" href="../">Cancelar</a>
+			</div>
+		</div>
+	</form>
+</div>
 
 {include 'templates/footer.tpl'}
+
+<script src="js/vehiculos.js"></script>
