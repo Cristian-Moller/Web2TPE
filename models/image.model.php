@@ -39,7 +39,9 @@ class ImageModel {
         if(count($imagenes) > 0){
             $sentencia = $this->db->prepare("DELETE FROM Imagen WHERE id=?");
             foreach($imagenes as $imagen){
-                unlink($imagen->imagen_url);
+                if(file_exists($imagen->imagen_url)){
+                    unlink($imagen->imagen_url);
+                }
                 $sentencia->execute(array($imagen->Id));
             }
         }

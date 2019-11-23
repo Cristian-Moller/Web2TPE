@@ -33,8 +33,6 @@ class ApiVehiculoController {
      * $params arreglo asociativo con los parámetros del recurso
      */
     public function GetById($params = null) {
-   //     $this->authHelper->redirectLoggedIn();
-
         // obtiene el parametro de la ruta
         $id = $params[':ID'];
         
@@ -50,7 +48,7 @@ class ApiVehiculoController {
         if ($vehiculo) {
             $vehiculo['nombreMarca'] = $marca['nombre'];
             $vehiculo['imagenes'] = $imagenes_url;
-            $this->view->response($vehiculo, 200); //implementar con fetch..
+            $this->view->response($vehiculo, 200); 
         } else {
             $this->view->response("No existe la tarea con el id={$id}", 404);
         }
@@ -58,9 +56,10 @@ class ApiVehiculoController {
     }
 
     public function GuardarVehiculo($params=null){
+        $this->authHelper->redirectLoggedIn();
         if(isset($_POST)){
             $vendido = 0;
-            if(isset($_POST['vendido'])){
+            if(isset($_POST['vendido']) && $_POST['vendido'] == true){
                 $vendido = 1;
             }
             if($_POST['vehiculoId']){
@@ -70,17 +69,17 @@ class ApiVehiculoController {
                 $id = $this->vehiculosModel->InsertarVehiculo($_POST['modelo'],$_POST['combustible'],$_POST['color'],$_POST['precio'],$_POST['marca'],$vendido);
             }
             if ($id) {
-                $this->UploadImages($id);
-                $this->view->response($id, 200); //implementar con fetch..
+                if(isset($_FILES["imagen"])){
+                    $this->UploadImages($id);
+                }
+                $this->view->response($id, 200); 
             } else {
                 $this->view->response("Ocurrio un error al actualizar el vehiculo", 500);
             }
         }
-        
-        //header("Location: " . BASE_URL);
     }
 
-    public function UploadImages($id)
+    private function UploadImages($id)
     {
         $this->imagesModel->deleteImagenes($id);
         $this->imagesModel->GuardarImagen($id);

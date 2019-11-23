@@ -1,15 +1,12 @@
 {include 'templates/header.tpl'}
 <div class="container-fluid">
-  <div class="card" style="width:400px" id="detalle-vehiculo">
+  <div class="card" style="width: 70%; margin:auto">
     <input id="vehiculo-id" name="vehiculoId" type="hidden" value="{$id}">
     <input id="vehiculo-action" name="vehiculoAction" type="hidden" value="{$action}">
 
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->
       <ol class="carousel-indicators" id="carousel-indicators">
-        
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
       </ol>
 
       <!-- Wrapper for slides -->
@@ -27,14 +24,17 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
-
     <div class="card-body">
-      <h4 class="card-title" id="card-title"></h4>
-      <ul class="list-group" id="card-details">
-
-      </ul>
+      <h2 class="card-title" id="card-title"></h2>
+    </div>
+    <ul class="list-group list-group-flush" id="card-details">
+    </ul>
+    <div class="card-body">
+      <a href="#" class="card-link">Card link</a>
+      <a href="#" class="card-link">Another link</a>
     </div>
   </div>
 </div>
+
 <script src="js/vehiculos.js"></script>
 {include 'templates/footer.tpl'}

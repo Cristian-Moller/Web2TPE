@@ -19,7 +19,6 @@ function getVehiculo() {
             break;
           }
           case "EDIT": {
-            console.log(res);
             cargarForm(res);
             break;
           }
@@ -36,12 +35,11 @@ function cargarDetalle(res) {
   const indicators = document.querySelector("#carousel-indicators");
   let count = 0;
   res.imagenes.forEach(imagen => {
-    console.log(imagen);
     carousel.innerHTML += `
         <div class="item  ${res.imagenes[0] === imagen ? "active" : ""}">
-          <img src="${imagen ? imagen : "img/default/notfound.png"}" alt="${
-      res.nombreMarca
-    } ${res.nombre}">
+          <img style="width:100%" src="${
+            imagen ? imagen : "img/default/notfound.png"
+          }" alt="${res.nombreMarca} ${res.nombre}">
         </div>`;
     indicators.innerHTML += `<li data-target="#myCarousel" data-slide-to="${count}" ${
       count == 0 ? 'class="active"' : ""
@@ -58,15 +56,17 @@ function cargarDetalle(res) {
 }
 
 function getMarcas() {
-  fetch(`/api/marcas`, {
-    method: "GET",
-    headers: { "Content-Type": "application/json" }
-  })
-    .then(response => response.json())
-    .then(marcas => {
-      cargarMarcas(marcas);
+  if (action.value == "EDIT") {
+    fetch(`/api/marcas`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" }
     })
-    .catch(err => console.log(err));
+      .then(response => response.json())
+      .then(marcas => {
+        cargarMarcas(marcas);
+      })
+      .catch(err => console.log(err));
+  }
 }
 
 function cargarForm(res) {
@@ -82,7 +82,7 @@ function cargarFormEdit(res) {
   document.querySelector("input[name=precio]").value = res.precio;
   document.querySelector("input[name=vendido]").checked =
     res.vendido == 1 ? true : false;
-  $("#marca-select").val(res.id_marca_fk);
+  document.getElementById("marca-select").value = res.id_marca_fk;
   res.imagenes.map(imagen => {
     document.querySelector(
       "#image-preview"
@@ -93,7 +93,6 @@ function cargarFormEdit(res) {
 function cargarMarcas(marcas) {
   const select = document.querySelector("#marca-select");
   let html = `<option value=''>Seleccione</option>`;
-  console.log(marcas);
   marcas.forEach(marca => {
     html += `<option value='${marca.id}'> ${marca.nombre} </option>`;
   });
@@ -112,7 +111,7 @@ function readURL(input) {
       );
     };
 
-    reader.readAsDataURL(input.files[0]);
+    reader.readAsDataURL(input.files[i]);
   }
 }
 
@@ -124,6 +123,9 @@ $("#imagenes").change(function() {
 $("form#vehiculo-form").submit(function(e) {
   e.preventDefault();
   var formData = new FormData(this);
+
+  if (document.querySelector("#imagenes").value === "") formData.delete('imagen[]');
+
   let url = !vehiculoId.value
     ? "api/vehiculos/new"
     : `api/vehiculos/edit/${vehiculoId.value}`;
@@ -133,7 +135,11 @@ $("form#vehiculo-form").submit(function(e) {
     type: "POST",
     data: formData,
     success: function(data) {
-      alert(data);
+      window.location.replace('/');
+    },
+    error: function(err) {
+      console.log(err);
+      window.location.replace('/');
     },
     cache: false,
     contentType: false,
