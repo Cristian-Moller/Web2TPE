@@ -45,70 +45,21 @@ class VehiculoController{
 
     public function InsertarVehiculo(){
         $this->authHelper->redirectLoggedIn();
-
         $this->vehiculosView->ModificarVehiculoCSR(null, "EDIT");
-
-        //header("Location: " . BASE_URL);
     }
 
-    public function EditarVehiculo(){
-        $this->authHelper->redirectLoggedIn();
-
-        $vendido = 0;
-        if(isset($_POST['vendido'])){
-            if($_POST['vendido'] == 'on'){
-                $vendido = 1;
-            }
-        }
-          // agarra el file
-          
-          if ($_FILES['imagen']['name']) {
-            if ($_FILES['imagen']['type'] == "image/jpeg" || $_FILES['imagen']['type'] == "image/jpg" || $_FILES['imagen']['type'] == "image/png") {
-                $this->vehiculosModel->EditarVehiculo($_POST['id'],$_POST['modelo'],$_POST['combustible'],$_POST['color'],$_POST['precio'],$_POST['marca'],$vendido,$_FILES['imagen']);
-            }
-            else {
-                $this->vehiculosView->showError("Formato no aceptado");
-                die();
-            }
-        }
-        else {
-            $this->vehiculosModel->EditarVehiculo($_POST['id'],$_POST['modelo'],$_POST['combustible'],$_POST['color'],$_POST['precio'],$_POST['marca'],$vendido);
-        }
-
-        header("Location: " . BASE_URL);
-    }
-    
-    
     public function GetVehiculo($id){
         $this->authHelper->redirectLoggedIn();
-
         $this->vehiculosView->ModificarVehiculoCSR($id, "EDIT");
     }
     
-
-    //para seleccion multiple
-  /*  public function validarFile(){
-
-        $valido = false;
-        if(count($_FILES['imagen']['type'])) {
-            foreach ($_FILES['imagen']['type'] as $type) {
-
-                if ($type == "image/jpeg" || $type == "image/jpg" || $type == "image/png") {
-                    $valido = true;
-                }
-                else {
-                    return false;
-                }
-            }
-        } else {
-            $valido = true;
-        }
-        return $valido;
-    }
-    */
-
     public function VerDetalle($id){
-        $this->vehiculosView->DisplayVehiculoCSR($id, "DETALLE");
+        $admin = false;
+        $isadmin = $this->authHelper->isAdmin();
+        if($isadmin == "1"){
+            $admin = true;
+        }
+        $this->vehiculosView->DisplayVehiculoCSR($id, "DETALLE", $admin);
     }
 }
 

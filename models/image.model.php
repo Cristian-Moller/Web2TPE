@@ -34,7 +34,6 @@ class ImageModel {
     }
 
     function deleteImagenes($id){
-        var_dump($id);
         $imagenes = $this->GetById($id);
         if(count($imagenes) > 0){
             $sentencia = $this->db->prepare("DELETE FROM Imagen WHERE id=?");
@@ -47,4 +46,3 @@ class ImageModel {
         }
     }
 }
-	

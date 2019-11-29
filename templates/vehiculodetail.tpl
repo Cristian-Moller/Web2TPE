@@ -29,12 +29,12 @@
     </div>
     <ul class="list-group list-group-flush" id="card-details">
     </ul>
-    <div class="card-body">
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
+    
   </div>
 </div>
 
+{include 'templates/comentario_csr.tpl'}
+
 <script src="js/vehiculos.js"></script>
+
 {include 'templates/footer.tpl'}

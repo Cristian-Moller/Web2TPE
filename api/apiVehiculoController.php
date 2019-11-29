@@ -50,9 +50,8 @@ class ApiVehiculoController {
             $vehiculo['imagenes'] = $imagenes_url;
             $this->view->response($vehiculo, 200); 
         } else {
-            $this->view->response("No existe la tarea con el id={$id}", 404);
+            $this->view->response("No existe el vehiculo con el id={$id}", 404);
         }
-
     }
 
     public function GuardarVehiculo($params=null){
@@ -79,8 +78,7 @@ class ApiVehiculoController {
         }
     }
 
-    private function UploadImages($id)
-    {
+    private function UploadImages($id){
         $this->imagesModel->deleteImagenes($id);
         $this->imagesModel->GuardarImagen($id);
     }

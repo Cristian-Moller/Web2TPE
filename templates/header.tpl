@@ -34,6 +34,7 @@
             <div class="btn btn-outline-success" role="group">
                 <button class="btn btn-outline-success" type="button"><a class="nav-item nav-link" href="login">LogIn</a></button>
                 <button class="btn btn-outline-success" type="button"><a class="nav-item nav-link" href="logout">LogOut</a></button>                    
+                <button class="btn btn-outline-success" type="button"><a class="nav-item nav-link" href="signup">SignUp</a></button>                                
             </div>
         
         </nav>

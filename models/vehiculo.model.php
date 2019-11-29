@@ -12,7 +12,9 @@ class VehiculoModel {
 
     function getAll(){     
         //preparo la consulta
-        $query = $this->db->prepare('SELECT vehiculo.*, marca.nombre as marca FROM vehiculo inner join marca on vehiculo.id_marca_fk=marca.id');
+        $query = $this->db->prepare('SELECT vehiculo.*, marca.nombre 
+                                    as marca FROM vehiculo inner join marca 
+                                    on vehiculo.id_marca_fk=marca.id');
 
         // ejecuto la consulta
         $ok = $query -> execute();

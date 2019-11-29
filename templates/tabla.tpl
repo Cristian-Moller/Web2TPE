@@ -44,7 +44,7 @@
                 <td class='bt-icon'><a href='borrar/{$vehiculo->id}'><i class='far fa-trash-alt'></i></a></td>
 
                 {else}
-            <tr id='{$vehiculo->id}'>
+                <tr id='{$vehiculo->id}'>
                 <th scope='row'>{$vehiculo->id}</th>
                 <td>{$vehiculo->marca}</td>
                 <td>{$vehiculo->nombre}</td>
@@ -58,7 +58,7 @@
 
                 <td class='bt-icon'><a href='editar/{$vehiculo->id}'><i class="fas fa-pencil-alt"></i></a></td>
 
-                <td class='bt-icon'><a href='borrar/{$vehiculo->id}'><i class='far fa-trash-alt'></i></a></i></td>
+                <td class='bt-icon'><a href='borrar/{$vehiculo->id}'><i class='far fa-trash-alt'></i></a></td>
 
                 {/if}
                 {/foreach}
@@ -69,6 +69,7 @@
     <div class="center-button">
         <input type="submit" value="Insertar" class="btn btn-primary" onclick="window.location='insertar';">
         <input type="submit" value="Marcas" class="btn btn-primary" onclick="window.location='marcas';" />
+        <input type="submit" value="Usuarios" class="btn btn-primary" onclick="window.location='usuarios';" />
     </div>
 
 

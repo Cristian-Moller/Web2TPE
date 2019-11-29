@@ -19,15 +19,12 @@ class MarcaController{
 
     function showMarcas() {
         $marcas = $this->marcasModel->getAll();
-
         $logueado = $this->authHelper->redirectLoggedIn();
-
         $this->marcasView->displayAll($marcas, $logueado);    
     }
 
     public function InsertarMarca(){
         $this->authHelper->redirectLoggedIn();
-
         $this->marcasModel->Insertarmarca($_POST['nombre']);
         header("Location: " . MARCA);
     }
@@ -40,11 +37,8 @@ class MarcaController{
 
     public function GetMarca($id){
         $logueado = $this->authHelper->redirectLoggedIn();
-
         $marcas = $this->marcasModel->getMarca($id);
-        
         $this->marcasView->completeFormMarca($marcas, $logueado);  
-        
     }
 
     public function EditarMarca(){

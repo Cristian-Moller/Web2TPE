@@ -15,12 +15,12 @@ class LoginController{
         $this->authHelper = new AuthHelper();
         $this->loginModel = new LoginModel();
         $this->loginview = new LoginView();
-
     }
 
     public function showLogin() {
         $this->loginview->showLogin();
     }
+
     public function logout() {
         $this->authHelper->redirectLoggedIn();
         $this->authHelper->logout();
@@ -35,11 +35,49 @@ class LoginController{
         if (!empty($user) && password_verify($password, $user->password)) {
             $this->authHelper->login($user);
             header('Location: ' . BASE_URL);
-                       
         } else {
             $this->loginview->showLogin("Login incorrecto");
         }
     }
 
+    function showUsuarios() {
+        $logueado = $this->authHelper->redirectLoggedAdmin();
+        $usuarios = $this->loginModel->getAll();
+        $this->loginview->displayAll($usuarios, $logueado);
+    }
+
+    public function AdminUsuario($id){
+        $this->loginModel->AdminUsuario($id, 1);
+        header("Location: " . USUARIOS);
+    }
+
+    public function NoAdminUsuario($id){
+        $this->loginModel->AdminUsuario($id, 0);
+        header("Location: " . USUARIOS);
+    }
+
+    public function InsertarUsuario(){
+        $this->loginModel->InsertarUsuario($_POST['email'],$_POST['password']);
+        $user = $this->loginModel->getByUsername($_POST['email']);
+        $this->authHelper->login($user);
+        header("Location: " . BASE_URL);
+    }
+
+    public function GetSignUp(){
+        $this->loginview->completeFormUsuario();  
+    }
+
+    public function BorrarUsuario($id){
+        $this->loginModel->BorrarUsuario($id);
+        header("Location: " . USUARIOS);
+    }
+    
 }
+
+
+
+
+
+
+
 

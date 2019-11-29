@@ -1,13 +1,13 @@
 "use strict";
 
 // event listeners
-const vehiculoId = document.querySelector("#vehiculo-id");
+const vehiculoIdetail = document.querySelector("#vehiculo-id");
 const action = document.querySelector("#vehiculo-action");
 
 function getVehiculo() {
   getMarcas();
-  if (vehiculoId.value) {
-    fetch(`/api/vehiculos/${vehiculoId.value}`, {
+  if (vehiculoIdetail.value) {
+    fetch(`/api/vehiculos/${vehiculoIdetail.value}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" }
     })
@@ -70,7 +70,7 @@ function getMarcas() {
 }
 
 function cargarForm(res) {
-  if (vehiculoId.value) {
+  if (vehiculoIdetail.value) {
     cargarFormEdit(res);
   }
 }
@@ -121,14 +121,14 @@ $("#imagenes").change(function() {
 
 //Post data
 $("form#vehiculo-form").submit(function(e) {
-  e.preventDefault();
+  e.preventDefault(); //no recarga la pagina
   var formData = new FormData(this);
 
   if (document.querySelector("#imagenes").value === "") formData.delete('imagen[]');
 
-  let url = !vehiculoId.value
+  let url = !vehiculoIdetail.value
     ? "api/vehiculos/new"
-    : `api/vehiculos/edit/${vehiculoId.value}`;
+    : `api/vehiculos/edit/${vehiculoIdetail.value}`;
 
   $.ajax({
     url: url,
@@ -138,7 +138,6 @@ $("form#vehiculo-form").submit(function(e) {
       window.location.replace('/');
     },
     error: function(err) {
-      console.log(err);
       window.location.replace('/');
     },
     cache: false,

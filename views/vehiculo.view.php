@@ -35,11 +35,12 @@ class VehiculoView{
         var_dump($vehiculo);
     }
 
-    function DisplayVehiculoCSR($id, $action){
+    function DisplayVehiculoCSR($id, $action, $isadmin){
       $smarty = new Smarty();
         $smarty->assign('titulo',"Detalle Vehiculo");
         $smarty->assign('id', $id);
         $smarty->assign('action', $action);
+        $smarty->assign('administrador', $isadmin);
         $smarty->assign('BASE_URL',BASE_URL);
         $smarty->display('templates/vehiculodetail.tpl');
 
